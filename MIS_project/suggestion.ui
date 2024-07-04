@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Suggestion</class>
+ <widget class="QDialog" name="Suggestion">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>2600</width>
+    <height>1700</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <widget class="QFrame" name="frame">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>305</y>
+     <width>401</width>
+     <height>1306</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(0, 0, 0);
+border-radius:30px;
+</string>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::StyledPanel</enum>
+   </property>
+   <property name="frameShadow">
+    <enum>QFrame::Raised</enum>
+   </property>
+   <widget class="QPushButton" name="wareForm">
+    <property name="geometry">
+     <rect>
+      <x>9</x>
+      <y>690</y>
+      <width>381</width>
+      <height>81</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Arial</family>
+      <pointsize>28</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-radius:40;
+background-color: rgb(255, 255, 255);
+
+</string>
+    </property>
+    <property name="text">
+     <string>库存报表</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="suggestion">
+    <property name="geometry">
+     <rect>
+      <x>9</x>
+      <y>990</y>
+      <width>381</width>
+      <height>81</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Arial</family>
+      <pointsize>28</pointsize>
+      <weight>50</weight>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-radius:40;
+background-color: rgb(85, 170, 255);
+
+</string>
+    </property>
+    <property name="text">
+     <string>建议</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="profit">
+    <property name="geometry">
+     <rect>
+      <x>9</x>
+      <y>390</y>
+      <width>381</width>
+      <height>81</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Arial</family>
+      <pointsize>28</pointsize>
+      <weight>50</weight>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-radius:40;
+background-color: rgb(255, 255, 255);
+
+</string>
+    </property>
+    <property name="text">
+     <string>收益</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="wareHouse">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>90</y>
+      <width>381</width>
+      <height>81</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Arial</family>
+      <pointsize>28</pointsize>
+      <weight>50</weight>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-radius:40;
+background-color: rgb(255, 255, 255);
+
+
+</string>
+    </property>
+    <property name="text">
+     <string>仓库</string>
+    </property>
+   </widget>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

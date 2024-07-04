@@ -1,0 +1,15 @@
+release/addnew.o
+release/finderror.o
+release/getout.o
+release/main.o
+release/mainwindow.o
+release/profit.o
+release/suggestion.o
+release/wareform.o
+release/moc_addnew.o
+release/moc_finderror.o
+release/moc_getout.o
+release/moc_mainwindow.o
+release/moc_profit.o
+release/moc_suggestion.o
+release/moc_wareform.o

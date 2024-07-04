@@ -1,0 +1,15 @@
+debug/addnew.o
+debug/finderror.o
+debug/getout.o
+debug/main.o
+debug/mainwindow.o
+debug/profit.o
+debug/suggestion.o
+debug/wareform.o
+debug/moc_addnew.o
+debug/moc_finderror.o
+debug/moc_getout.o
+debug/moc_mainwindow.o
+debug/moc_profit.o
+debug/moc_suggestion.o
+debug/moc_wareform.o
