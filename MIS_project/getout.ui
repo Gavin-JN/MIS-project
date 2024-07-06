@@ -13,7 +13,7 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <widget class="QPushButton" name="decline_out">
+  <widget class="QPushButton" name="declineOut">
    <property name="geometry">
     <rect>
      <x>490</x>
@@ -26,7 +26,7 @@
     <string>删除</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="name_out">
+  <widget class="QLineEdit" name="nameOut">
    <property name="geometry">
     <rect>
      <x>300</x>
@@ -36,7 +36,7 @@
     </rect>
    </property>
   </widget>
-  <widget class="QLineEdit" name="more_out">
+  <widget class="QLineEdit" name="moreOut">
    <property name="geometry">
     <rect>
      <x>300</x>
@@ -46,7 +46,7 @@
     </rect>
    </property>
   </widget>
-  <widget class="QPushButton" name="get_out">
+  <widget class="QPushButton" name="outGet">
    <property name="geometry">
     <rect>
      <x>190</x>
@@ -101,7 +101,7 @@
     <string>商品名称：</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="cencle_out">
+  <widget class="QPushButton" name="cencleOut">
    <property name="geometry">
     <rect>
      <x>480</x>
@@ -114,7 +114,7 @@
     <string>取消</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="number_out">
+  <widget class="QLineEdit" name="numberOut">
    <property name="geometry">
     <rect>
      <x>300</x>

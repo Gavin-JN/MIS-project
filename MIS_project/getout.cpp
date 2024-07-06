@@ -47,7 +47,7 @@ void getOut::on_get_out_clicked()  //出库
         else
     {
         findError *err=new findError;
-        err->ui->Error_reason->setText("No Find!");
+        err->ui->errorReason->setText("No Find!");
         err->show();
     }
 }

@@ -34,7 +34,7 @@
     <string>错误！</string>
    </property>
   </widget>
-  <widget class="QLabel" name="Error_reason">
+  <widget class="QLabel" name="errorReason">
    <property name="geometry">
     <rect>
      <x>260</x>

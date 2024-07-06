@@ -21,7 +21,7 @@ class Ui_findError
 {
 public:
     QLabel *label;
-    QLabel *Error_reason;
+    QLabel *errorReason;
     QPushButton *pushButton;
 
     void setupUi(QDialog *findError)
@@ -38,15 +38,15 @@ public:
         font.setBold(true);
         font.setWeight(75);
         label->setFont(font);
-        Error_reason = new QLabel(findError);
-        Error_reason->setObjectName(QString::fromUtf8("Error_reason"));
-        Error_reason->setGeometry(QRect(260, 250, 301, 81));
+        errorReason = new QLabel(findError);
+        errorReason->setObjectName(QString::fromUtf8("errorReason"));
+        errorReason->setGeometry(QRect(260, 250, 301, 81));
         QFont font1;
         font1.setFamily(QString::fromUtf8("Arial"));
         font1.setPointSize(28);
         font1.setBold(true);
         font1.setWeight(75);
-        Error_reason->setFont(font1);
+        errorReason->setFont(font1);
         pushButton = new QPushButton(findError);
         pushButton->setObjectName(QString::fromUtf8("pushButton"));
         pushButton->setGeometry(QRect(350, 380, 151, 61));
@@ -66,7 +66,7 @@ public:
     {
         findError->setWindowTitle(QCoreApplication::translate("findError", "Dialog", nullptr));
         label->setText(QCoreApplication::translate("findError", "\351\224\231\350\257\257\357\274\201", nullptr));
-        Error_reason->setText(QString());
+        errorReason->setText(QString());
         pushButton->setText(QCoreApplication::translate("findError", "\347\241\256\350\256\244", nullptr));
     } // retranslateUi
 
