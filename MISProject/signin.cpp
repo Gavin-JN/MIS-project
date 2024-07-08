@@ -1,6 +1,7 @@
 #include "signin.h"
 #include "ui_signin.h"
 #include "mainwindow.h"
+#include "ui_mainwindow.h"
 #include "signup.h"
 #include <QSqlDatabase>
 #include <QSqlQuery>
@@ -9,6 +10,7 @@
 #include "catcherror.h"
 #include "QMessageBox"
 #include "global.h"
+#include "logmanager.h"
 
 extern MainWindow *WINDOW;
 SignIn::SignIn(QWidget *parent) :
@@ -24,21 +26,21 @@ SignIn::~SignIn()
     delete ui;
 }
 
-void initializeDatabase()
-{
-    QSqlDatabase db= QSqlDatabase::addDatabase("QSQLITE");
-    db.setDatabaseName("usersInformation.db");
+//void initializeDatabase()
+//{
+//    QSqlDatabase db= QSqlDatabase::addDatabase("QSQLITE");
+//    db.setDatabaseName("usersInformation.db");
 
-    if(!db.open())
-    {
-        qDebug()<<"ERROR: Could not connect to database";
-        return;
-    }
+//    if(!db.open())
+//    {
+//        qDebug()<<"ERROR: Could not connect to database";
+//        return;
+//    }
 
-    QSqlQuery query;
-    query.exec("CREATE TABLE IF NOT EXISTS usersInformation (userName TEXT PRIMARY KEY, password TEXT");
-    db.close();
-}
+//    QSqlQuery query;
+//    query.exec("CREATE TABLE IF NOT EXISTS usersInformation (userName TEXT PRIMARY KEY, password TEXT");
+//    db.close();
+//}
 
 
 void SignIn::on_signIn_clicked()
@@ -47,40 +49,54 @@ void SignIn::on_signIn_clicked()
     QString  userName=ui->userName->text();
     QString password=ui->password->text();
     g_userName=userName;
-    QSqlDatabase db=QSqlDatabase::addDatabase("QSQLITE");
-    db.setDatabaseName("usersInformation.db");
 
-    if(!db.open())
+    LogManager manage1;
+    bool ifSignIn=manage1.ifSignInSuccess(userName,password);
+    if(ifSignIn)
     {
-        qDebug()<<"ERROR: Could not connect to database";
-                  return;
-    }
-
-    QSqlQuery query;
-    query.prepare("SELECT * FROM usersInformation WHERE userName= :userName AND password= :password");
-    query.bindValue(":userName",userName);
-    query.bindValue(":password",password);
-
-    if(query.exec()&&query.next())
-    {
-
         emit loginSuccessful(g_userName);
-
-        qDebug()<<"Name:"<<g_userName;
-
         this->close();
         WINDOW->show();
     }
     else
     {
         QMessageBox::warning(this, "Error", "用户名或密码错误");
-//        CatchError *errorWithSignIn=new CatchError;
-//        errorWithSignIn->setErrorReason("用户名或密码错误");
-//        errorWithSignIn->show();
-
     }
 
-    db.close();
+
+
+
+//    QSqlDatabase db=QSqlDatabase::addDatabase("QSQLITE");
+//    db.setDatabaseName("usersInformation.db");
+
+//    if(!db.open())
+//    {
+//        qDebug()<<"ERROR: Could not connect to database";
+//                  return;
+//    }
+
+//    QSqlQuery query;
+//    query.prepare("SELECT * FROM usersInformation WHERE userName= :userName AND password= :password");
+//    query.bindValue(":userName",userName);
+//    query.bindValue(":password",password);
+
+//    if(query.exec()&&query.next())
+//    {
+
+//        emit loginSuccessful(g_userName);
+
+//        qDebug()<<"Name(login):"<<g_userName;
+
+//        this->close();
+//        WINDOW->show();
+//    }
+//    else
+//    {
+//        QMessageBox::warning(this, "Error", "用户名或密码错误");
+
+//    }
+
+//    db.close();
 
 }
 

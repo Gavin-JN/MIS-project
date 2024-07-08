@@ -2,6 +2,7 @@ release/addnew.o
 release/catcherror.o
 release/getout.o
 release/global.o
+release/logmanager.o
 release/main.o
 release/mainwindow.o
 release/profit.o

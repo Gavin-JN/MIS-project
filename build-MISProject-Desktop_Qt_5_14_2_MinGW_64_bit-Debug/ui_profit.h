@@ -26,10 +26,10 @@ public:
     {
         if (Profit->objectName().isEmpty())
             Profit->setObjectName(QString::fromUtf8("Profit"));
-        Profit->resize(1200, 700);
+        Profit->resize(948, 700);
         profitTable = new QTableView(Profit);
         profitTable->setObjectName(QString::fromUtf8("profitTable"));
-        profitTable->setGeometry(QRect(130, 10, 761, 691));
+        profitTable->setGeometry(QRect(30, -10, 881, 691));
 
         retranslateUi(Profit);
 

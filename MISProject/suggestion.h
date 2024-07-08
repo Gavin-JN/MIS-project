@@ -3,6 +3,7 @@
 
 #include <QDialog>
 
+
 namespace Ui {
 class Suggestion;
 }
@@ -15,8 +16,13 @@ public:
     explicit Suggestion(QWidget *parent = nullptr);
     ~Suggestion();
 
+
+private slots:
+    void on_knowBt_clicked();
+
 private:
     Ui::Suggestion *ui;
+
 };
 
 #endif // SUGGESTION_H

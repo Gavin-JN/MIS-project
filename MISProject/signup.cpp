@@ -7,7 +7,7 @@
 #include <QSqlError>
 #include <QDebug>
 #include<QMessageBox>
-
+#include <logmanager.h>
 
 
 SignUp::SignUp(QWidget *parent) :
@@ -34,37 +34,60 @@ void SignUp::on_newSignUp_clicked()
     QString newUserName=ui->newUserName->text();
     QString newPassword=ui->newPassword->text();
 
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
-        db.setDatabaseName("usersInformation.db");
+//    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
+//        db.setDatabaseName("usersInformation.db");
 
-        if (!db.open())
+//        if (!db.open())
+//        {
+//            qDebug() << "Error: Could not connect to database.";
+//            return;
+//        }
+
+//        QSqlQuery createTableQuery;
+//        createTableQuery.exec("CREATE TABLE IF NOT EXISTS usersInformation (userName TEXT PRIMARY KEY, password TEXT )");
+
+
+//        QSqlQuery query;
+//        query.prepare("INSERT INTO usersInformation (userName, password) VALUES (:userName, :password)");
+//        query.bindValue(":userName", newUserName);
+//        query.bindValue(":password", newPassword);
+
+//        if (query.exec())
+//        {
+//           QMessageBox::information(this,"Success","注册成功");
+//            this->close();
+//           SignIn *in=new SignIn;
+//           in->show();
+
+
+//        }
+//        else
+//        {
+//                QMessageBox::warning(this, "Error", "用户名已被注册");
+//         }
+//        db.close();
+
+    LogManager manager;
+    bool ifRepete=manager.ifExit(newUserName);
+    bool ifSuccess=manager.addNew(newUserName,newPassword);
+    if(ifRepete)
+    {
+        QMessageBox::warning(this,"Error","用户名已被注册");
+
+    }
+    else
+    {
+        if(ifSuccess)
         {
-            qDebug() << "Error: Could not connect to database.";
-            return;
-        }
-
-        QSqlQuery createTableQuery;
-        createTableQuery.exec("CREATE TABLE IF NOT EXISTS usersInformation (userName TEXT PRIMARY KEY, password TEXT )");
-
-
-        QSqlQuery query;
-        query.prepare("INSERT INTO usersInformation (userName, password) VALUES (:userName, :password)");
-        query.bindValue(":userName", newUserName);
-        query.bindValue(":password", newPassword);
-
-        if (query.exec())
-        {
-           QMessageBox::information(this,"Success","注册成功");
-            this->close();
-           SignIn *in=new SignIn;
-           in->show();
-
-
+            QMessageBox::information(this,"Success","注册成功");
+                        this->close();
+                       SignIn *in=new SignIn;
+                       in->show();
         }
         else
         {
-                QMessageBox::warning(this, "Error", "用户名已被注册");
-         }
-        db.close();
+            qDebug()<<"Error in sign up";
+        }
+    }
 
 }

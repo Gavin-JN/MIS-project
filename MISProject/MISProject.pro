@@ -1,4 +1,6 @@
 QT       += core gui sql
+#QT += network
+
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 CONFIG += c++11
@@ -19,6 +21,7 @@ SOURCES += \
     catcherror.cpp \
     getout.cpp \
     global.cpp \
+    logmanager.cpp \
     main.cpp \
     mainwindow.cpp \
     profit.cpp \
@@ -32,6 +35,7 @@ HEADERS += \
     catcherror.h \
     getout.h \
     global.h \
+    logmanager.h \
     mainwindow.h \
     profit.h \
     signin.h \
@@ -54,3 +58,4 @@ FORMS += \
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+

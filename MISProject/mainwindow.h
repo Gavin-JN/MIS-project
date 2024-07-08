@@ -27,6 +27,8 @@ private slots:
 
     void initializeDatabase5();
 
+    void renewTable(QString userName);
+
     void on_goProfit_clicked();
 
     void on_goWareForm_clicked();

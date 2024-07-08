@@ -29,7 +29,7 @@ public:
         WareForm->resize(993, 714);
         wareTable = new QTableView(WareForm);
         wareTable->setObjectName(QString::fromUtf8("wareTable"));
-        wareTable->setGeometry(QRect(80, 20, 841, 671));
+        wareTable->setGeometry(QRect(50, 20, 881, 671));
 
         retranslateUi(WareForm);
 

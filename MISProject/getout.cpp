@@ -138,7 +138,7 @@ else
               return;
        }
        if(!query2.exec("CREATE TABLE IF NOT EXISTS accessRecord (userID TEXT PRIMARY KEY, namePutIn TEXT,typePutIn TEXT, numberPutIn  TEXT, more TEXT, timePutIn TEXT)"))
-      {
+       {
            qDebug()<<"Error:Could not creat table"<<query2.lastError().text();
            db.close();
            return ;
@@ -190,26 +190,30 @@ else
            qDebug()<<"Error:Could not creat Profittable"<<query3.lastError().text();
            dbProfit.close();
            return ;
-       }
+      }
 
-       query3.prepare("SELECT profit ,salePrice FROM profitDatabase WHERE userID = :userID AND goodsName = :goodsName");
+       query3.prepare("SELECT profit ,saleNumber ,salePrice FROM profitDatabase WHERE userID = :userID AND goodsName = :goodsName");
        query3.bindValue(":userID", g_userName);
        query3.bindValue(":goodsName", nameOut);
-
+       if(query3.exec() && query3.next())
+       {
 
           double usedProfitDouble = query3.value("profit").toDouble(); //获得该商品的原有的收益信息
+          double usedSaleNumber=query3.value("saleNumber").toDouble();
           double salePrice = query3.value("salePrice").toDouble();
 
            qDebug()<<"out_useProfit:"<<usedProfitDouble;
+
            qDebug()<<"salePrice:"<<salePrice;
 
            double profitValueDouble = usedProfitDouble + (salePrice*numOut);
+           double saleNumberDouble=usedSaleNumber+numOut;
            QString profitValue = QString::number(profitValueDouble);
            //得到新的收益信息并更新数据库的信息
            QSqlQuery query4(dbProfit);
            query4.prepare("UPDATE profitDatabase SET profit = :profit, saleNumber = :saleNumber WHERE userID = :userID AND goodsName = :goodsName");
            query4.bindValue(":profit", profitValue);
-           query4.bindValue(":saleNumber", numOut);
+           query4.bindValue(":saleNumber", saleNumberDouble);
            query4.bindValue(":userID", g_userName);
            query4.bindValue(":goodsName", nameOut);
 
@@ -225,6 +229,7 @@ else
 
 
        dbProfit.close();
+       }
 
        //收益模块结束
 

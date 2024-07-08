@@ -17,19 +17,20 @@
 #include <QCloseEvent>
 #include "global.h"
 
+
 MainWindow *WINDOW;
-
-
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
     WINDOW =this;
     signiin=new SignIn(this);
     signiin->show(); //打开登录界面
     connect(signiin,&SignIn::loginSuccessful,this,&MainWindow::onLoginSuccessful);
+
 
     ui->tableWidget->setRowCount(0);
     ui->tableWidget->setColumnCount(5);
@@ -42,21 +43,18 @@ MainWindow::MainWindow(QWidget *parent)
     horizontalList<<"售价";
     horizontalList<<"备注";
     ui->tableWidget->setHorizontalHeaderLabels(horizontalList);
-   //从数据库中获得对应用户的仓库的信息，并填入到对应的位置
-    QSqlDatabase db=QSqlDatabase::addDatabase("QSQLITE");
-    db.setDatabaseName("usersWare.db");
-
-    if(!db.open())
-    {
-        qDebug()<<"ERROR: Could not connect to database";
-                  return;
-    }
-
-    QSqlQuery queryOfWare;
-    queryOfWare.prepare("SELECT * FROM usersWare WHERE userID= :userID");
-    queryOfWare.bindValue(":userID",g_userName);
 
 
+
+}
+
+void MainWindow::onLoginSuccessful(QString userName)  //登录成功后，获得用户ID并从数据库 usersDetails中获得主页面的仓库信息
+{
+    userID=userName;
+    qDebug()<<"***"<<userID;
+    g_userName=userID;
+    renewTable(userName);
+    loadWarehouseDetails(userID);
 
 }
 
@@ -94,42 +92,66 @@ void MainWindow::initializeDatabase5()    //数据库： usesWare
 
     QSqlQuery query(db);
     query.exec("CREATE TABLE IF NOT EXISTS usersWare (userID TEXT , goodName TEXT, goodNumber TEXT, goodCost TEXT, goodSale TEXT, moreInformation TEXT)");
-    db.close();
-}
+    db.close();}
 
-void MainWindow::onLoginSuccessful(QString userName)  //登录成功后，获得用户ID并从数据库 usersDetails中获得主页面的仓库信息
+void MainWindow::renewTable(QString userName)
 {
-    userID=userName;
-    qDebug()<<"***"<<userID;
+    //从数据库中获得对应用户的仓库的信息，并填入到对应的位置
 
-    loadWarehouseDetails(userID);
+         QSqlDatabase db=QSqlDatabase::addDatabase("QSQLITE");
+         db.setDatabaseName("usersWare.db");
 
-//    QSqlDatabase db=QSqlDatabase::addDatabase("QSQLITE");
-//    db.setDatabaseName("usersDetails.db");
+         if(!db.open())
+         {
+             qDebug()<<"ERROR: Could not connect to database";
+                       return;
+         }
 
-//    if(!db.open())
-//    {
-//        qDebug()<<"ERROR: Could not connect to database";
-//                  return;
-//    }
+         QSqlQuery queryOfWare;
+         queryOfWare.prepare("SELECT * FROM usersWare WHERE userID= :userID");
+         queryOfWare.bindValue(":userID",userName);
 
-//    QSqlQuery query;
-//    query.prepare("SELECT wareName, wareKeeperName, wareKeeperNumber, wareFoundTime FROM usersDetails WHERE userID = :userID");
-//        query.bindValue(":userID", userID);
+         qDebug()<<"reNew ,userName:"<<userName;
 
-//        if (query.exec() && query.next()) {
 
-//            WINDOW->ui->wareName->setText(query.value("wareName").toString());
-//            WINDOW->ui->wareKeeperName->setText(query.value("wareKeeperName").toString());
-//            WINDOW->ui->wareKeeperNumber->setText(query.value("wareKeeperNumber").toString());
-//            WINDOW->ui->wareFoundTime->setText(query.value("wareFoundTime").toString());
-//        }
-//        else
-//        {
-//            qDebug()<<"Error: No find waredetails";      //*
-//        }
+         if(!queryOfWare.exec())
+         {
+             qDebug()<<"userWare wrong"<<queryOfWare.lastError().text();
+             db.close();
+             return;
+         }
+         int row=0;
+         WINDOW->ui->tableWidget->clearContents();
+         WINDOW->ui->tableWidget->setRowCount(0);
+         while(queryOfWare.next())
+         {
+             WINDOW->ui->tableWidget->insertRow(row);
+             for(int i=0;i<5;i++)
+             {
+                 QString putIn=queryOfWare.value(i+1).toString();
+                 QTableWidgetItem * putInTable= new QTableWidgetItem(putIn);
+                 putInTable->setTextAlignment(Qt::AlignCenter);
+                 WINDOW->ui->tableWidget->setItem(row,i,putInTable);
+             }
+             row++;
+         }
+
+         //删除原有信息
+         QSqlQuery queryDelete;
+         queryDelete.prepare("DELETE FROM usersWare WHERE userID = :userID");
+         queryDelete.bindValue(":userID",userName);
+
+         if (!queryDelete.exec())
+         {
+                     qDebug() << "Error delete wrong data:" << queryDelete.lastError().text();
+         }
+         else
+         {
+                     qDebug() << "Data for userID" << userName << "deleted successfully";
+         }
+
+         db.close();
 }
-
 
 void MainWindow::on_goProfit_clicked()
 {
@@ -203,7 +225,6 @@ void  MainWindow::loadWarehouseDetails(const QString &userID_p)   //获得仓库
     db.close();
 }
 
-
 void MainWindow::on_saveBt_clicked()    //保存输入的仓库信息,将保存的仓库的信息传入到数据库中
 {
     QString wareName=WINDOW->ui->wareName->text();
@@ -228,7 +249,7 @@ void MainWindow::on_saveBt_clicked()    //保存输入的仓库信息,将保存�
     //检查该用户是否已经保存过仓库的信息
     QSqlQuery checkIfExit(db);
     checkIfExit.prepare("SELECT COUNT(*) FROM usersDetails WHERE userID= :userID");
-    checkIfExit.bindValue(":userID",userID);
+    checkIfExit.bindValue(":userID",g_userName);
 
     if(checkIfExit.exec()&&checkIfExit.next())
     {
@@ -244,9 +265,9 @@ void MainWindow::on_saveBt_clicked()    //保存输入的仓库信息,将保存�
         }
 
 
-        qDebug()<<userID<<"count:"<<count;
+        qDebug()<<g_userName<<"count:"<<count;
 
-    query.bindValue(":userID", userID);
+    query.bindValue(":userID", g_userName);
     query.bindValue(":wareName", wareName);
     query.bindValue(":wareKeeperName", wareKeeperName);
     query.bindValue(":wareKeeperNumber", wareKeeperNumber);
@@ -269,8 +290,6 @@ void MainWindow::on_saveBt_clicked()    //保存输入的仓库信息,将保存�
 
 }
 
-
-
 void MainWindow::closeEvent(QCloseEvent *eventWhenClose)  //关闭主窗口是将仓库内商品的信息进行存储
     {
         // 执行关闭前的操作
@@ -283,6 +302,7 @@ void MainWindow::closeEvent(QCloseEvent *eventWhenClose)  //关闭主窗口是�
         if (resBtn != QMessageBox::Yes)
         {
          eventWhenClose->ignore() ; // 忽略关闭事件，窗口不会关闭
+         return;
         }
         else
         {
@@ -306,6 +326,9 @@ void MainWindow::closeEvent(QCloseEvent *eventWhenClose)  //关闭主窗口是�
              {
                  QString goodName=ui->tableWidget->item(row,0)->text();
                  QString goodNumber=ui->tableWidget->item(row,1)->text();
+
+                 qDebug()<<"goodNumber:"<<goodNumber;
+
                  QString goodCost=ui->tableWidget->item(row,2)->text();
                  QString goodSale=ui->tableWidget->item(row,3)->text();
                  QString moreInformation=ui->tableWidget->item(row,4)->text();
@@ -314,6 +337,7 @@ void MainWindow::closeEvent(QCloseEvent *eventWhenClose)  //关闭主窗口是�
                  queryWare.prepare("INSERT INTO usersWare (userID, goodName, goodNumber, goodCost, goodSale,moreInformation) VALUES (:userID, :goodName, :goodNumber, :goodCost, :goodSale, :moreInformation)");
                  queryWare.bindValue(":userID",g_userName);
                  queryWare.bindValue(":goodName",goodName);
+                 queryWare.bindValue(":goodNumber",goodNumber);
                  queryWare.bindValue(":goodCost",goodCost);
                  queryWare.bindValue(":goodSale",goodSale);
                  queryWare.bindValue(":moreInformation",moreInformation);

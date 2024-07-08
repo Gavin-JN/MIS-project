@@ -16,9 +16,9 @@
   <widget class="QTableView" name="wareTable">
    <property name="geometry">
     <rect>
-     <x>80</x>
+     <x>50</x>
      <y>20</y>
-     <width>841</width>
+     <width>881</width>
      <height>671</height>
     </rect>
    </property>

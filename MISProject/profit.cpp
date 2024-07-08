@@ -39,7 +39,7 @@ Profit::Profit(QWidget *parent) :
     }
 
     //表格
-    QString queryStr =  QString ("SELECT goodName, costPrice, salePrice, saleNumber, buyNumber,profit FROM profitDatabase WHERE userID = '%1'").arg(g_userName);
+    QString queryStr =  QString ("SELECT goodsName, costPrice, salePrice, saleNumber, buyNumber,profit FROM profitDatabase WHERE userID = '%1'").arg(g_userName);
     setModelStr(queryStr);
     ui->profitTable->setModel(modelProfit);
     ui->profitTable->resizeColumnsToContents();
