@@ -13,35 +13,15 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <widget class="QTableWidget" name="profitTable">
+  <widget class="QTableView" name="profitTable">
    <property name="geometry">
     <rect>
-     <x>10</x>
+     <x>130</x>
      <y>10</y>
-     <width>1181</width>
-     <height>681</height>
+     <width>761</width>
+     <height>691</height>
     </rect>
    </property>
-   <column>
-    <property name="text">
-     <string>新建列</string>
-    </property>
-   </column>
-   <column>
-    <property name="text">
-     <string>商品名称</string>
-    </property>
-   </column>
-   <column>
-    <property name="text">
-     <string>进价</string>
-    </property>
-   </column>
-   <column>
-    <property name="text">
-     <string>收益</string>
-    </property>
-   </column>
   </widget>
  </widget>
  <resources/>

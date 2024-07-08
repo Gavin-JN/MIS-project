@@ -1,6 +1,7 @@
 debug/addnew.o
 debug/catcherror.o
 debug/getout.o
+debug/global.o
 debug/main.o
 debug/mainwindow.o
 debug/profit.o

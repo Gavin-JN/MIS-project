@@ -18,6 +18,7 @@ SOURCES += \
     addnew.cpp \
     catcherror.cpp \
     getout.cpp \
+    global.cpp \
     main.cpp \
     mainwindow.cpp \
     profit.cpp \
@@ -30,6 +31,7 @@ HEADERS += \
     addnew.h \
     catcherror.h \
     getout.h \
+    global.h \
     mainwindow.h \
     profit.h \
     signin.h \

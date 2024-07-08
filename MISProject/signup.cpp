@@ -55,9 +55,11 @@ void SignUp::on_newSignUp_clicked()
         if (query.exec())
         {
            QMessageBox::information(this,"Success","注册成功");
-           this->close();
+            this->close();
            SignIn *in=new SignIn;
            in->show();
+
+
         }
         else
         {

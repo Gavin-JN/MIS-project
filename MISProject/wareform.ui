@@ -6,42 +6,22 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1200</width>
-    <height>700</height>
+    <width>993</width>
+    <height>714</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <widget class="QTableWidget" name="wareTable">
+  <widget class="QTableView" name="wareTable">
    <property name="geometry">
     <rect>
-     <x>10</x>
-     <y>10</y>
-     <width>731</width>
-     <height>681</height>
+     <x>80</x>
+     <y>20</y>
+     <width>841</width>
+     <height>671</height>
     </rect>
    </property>
-   <column>
-    <property name="text">
-     <string>商品名称</string>
-    </property>
-   </column>
-   <column>
-    <property name="text">
-     <string>出/入库</string>
-    </property>
-   </column>
-   <column>
-    <property name="text">
-     <string>数量</string>
-    </property>
-   </column>
-   <column>
-    <property name="text">
-     <string>备注</string>
-    </property>
-   </column>
   </widget>
  </widget>
  <resources/>

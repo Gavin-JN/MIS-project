@@ -16,10 +16,16 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+protected:
+    void closeEvent(QCloseEvent *eventWhenClose);
+
 private slots:
+
     void onLoginSuccessful(QString userName);
 
     void initializeDatabase2();
+
+    void initializeDatabase5();
 
     void on_goProfit_clicked();
 
@@ -37,7 +43,7 @@ private slots:
 
 public:
     Ui::MainWindow *ui;
-    QString userID;
+    QString  userID;
     SignIn *signiin;
 };
 #endif // MAINWINDOW_H

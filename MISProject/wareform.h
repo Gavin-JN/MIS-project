@@ -2,6 +2,8 @@
 #define WAREFORM_H
 
 #include <QDialog>
+#include <QSqlQueryModel>
+#include <QSqlDatabase>
 
 namespace Ui {
 class WareForm;
@@ -16,8 +18,11 @@ public:
     ~WareForm();
     void appentData(QString name,int operater,double number,QString moreInformation);
 
-public:
+private:
     Ui::WareForm *ui;
+    QSqlDatabase db;
+    QSqlQueryModel *model;
+    void setModelStr(const QString &query);
 };
 
 #endif // WAREFORM_H

@@ -2,6 +2,8 @@
 #define PROFIT_H
 
 #include <QDialog>
+#include <QSqlDatabase>
+#include <QSqlQueryModel>
 
 namespace Ui {
 class Profit;
@@ -14,9 +16,14 @@ class Profit : public QDialog
 public:
     explicit Profit(QWidget *parent = nullptr);
     ~Profit();
+    void setModelStr(const QString &query);
 
 private:
+    QSqlDatabase dbProfit;
     Ui::Profit *ui;
+    QSqlQueryModel *modelProfit;
+    QSqlDatabase profitdb;
+
 };
 
 #endif // PROFIT_H

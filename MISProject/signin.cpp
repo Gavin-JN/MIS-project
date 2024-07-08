@@ -8,6 +8,7 @@
 #include <QDebug>
 #include "catcherror.h"
 #include "QMessageBox"
+#include "global.h"
 
 extern MainWindow *WINDOW;
 SignIn::SignIn(QWidget *parent) :
@@ -45,7 +46,7 @@ void SignIn::on_signIn_clicked()
     //检测账户和密码是否正确
     QString  userName=ui->userName->text();
     QString password=ui->password->text();
-
+    g_userName=userName;
     QSqlDatabase db=QSqlDatabase::addDatabase("QSQLITE");
     db.setDatabaseName("usersInformation.db");
 
@@ -62,7 +63,11 @@ void SignIn::on_signIn_clicked()
 
     if(query.exec()&&query.next())
     {
-        emit loginSuccessful(userName);
+
+        emit loginSuccessful(g_userName);
+
+        qDebug()<<"Name:"<<g_userName;
+
         this->close();
         WINDOW->show();
     }

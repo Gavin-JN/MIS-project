@@ -20,6 +20,10 @@ public:
 private slots:
     void on_cencleIn_clicked();
 
+    void initializeDatabase3();  //数据库： accessRecord
+
+    void initializeDatabase4();  //数据库： profitDatabase
+
     void on_addIn_clicked();
 
 private:
